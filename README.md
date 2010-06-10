@@ -1,7 +1,7 @@
 SpazAPI
 =======
 
-*Since this README.md uses symlinks developers will need to be on *nix/linux platforms -- FRAPI performs well on Windows, however joining the two repos together might prove to be a bitch -- unless you can magically make decent symlinks on windows :D*
+**Since this README.md uses symlinks developers will need to be on *nix/linux platforms** -- **FRAPI performs well on Windows, however joining the two repos together might prove to be a bitch -- unless you can magically make decent symlinks on windows :D**
 
 First of all, install FRAPI (Follow the instructions on : http://wiki.github.com/frapi/frapi/getting-started )
 
