@@ -17,11 +17,11 @@ Then remove all that's there
 
 And now symlink all your SPAZ\_API\_PATH custom files into this directory like such
 
-	ln -s SPAZ_API_PATH/src/frapi/custom/* FRAPI_PATH/src/frapi/custom
+	ln -s SPAZ_API_PATH/custom/* FRAPI_PATH/src/frapi/custom
 
 Restart apache and go to your "admin.frapi" page. You will see the actions and modules that the SpazAPI has to offer. 
 
-You can now start hacking and testing  your actions (Which code is located into SPAZ\_API\_PATH/src/frapi/custom -- The actions (controllers) are in SPAZ\_API\_PATH/src/frapi/custom/Action)
+You can now start hacking and testing  your actions (Which code is located into SPAZ\_API\_PATH//custom -- The actions (controllers) are in SPAZ\_API\_PATH/custom/Action)
 
 
 CouchDB
