@@ -27,3 +27,7 @@ You can now start hacking and testing  your actions (Which code is located into 
 CouchDB
 ======= 
 The SpazAPI uses CouchDB and should you decide to develop features that use CouchDB, you can ask davidc_ to give you access to the developer's CouchDB database provided by [Couchio](http://couch.io) (This way you won't have to install erlang and setup your own couch :))
+
+Memcache
+========
+For rate limiting, FRAPI uses memcache on localhost. You may want to setup memcache and redis (As future versions will be using Redis

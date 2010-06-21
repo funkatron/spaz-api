@@ -2,7 +2,7 @@
 
 class Spaz_Thumb
 {
-    const API_KEY = 'c72c12f28005e5859e3493446a5e4c3f';
+    const API_KEY = 'thisisthegoodkeyyoushoudlputhere';
 
     const THUMB_SIZE = 'medium2';
     const BASE_URL = 'http://api.getspaz.com';
