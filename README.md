@@ -21,8 +21,9 @@ And now symlink all your SPAZ\_API\_PATH custom files into this directory like s
 
 Restart apache and go to your "admin.frapi" page. You will see the actions and modules that the SpazAPI has to offer. 
 
-You can now start hacking and testing  your actions (Which code is located into SPAZ\_API\_PATH//custom -- The actions (controllers) are in SPAZ\_API\_PATH/custom/Action)
+You can now start hacking and testing  your actions (Which code is located into SPAZ\_API\_PATH/custom -- The actions (controllers) are in SPAZ\_API\_PATH/custom/Action)
 
+*If you are seeing some file-access errors on the administration panel, just make sure your SPAZ\_API\_PATH/custom is writeable by the web user*
 
 CouchDB
 ======= 
