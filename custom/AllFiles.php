@@ -1,4 +1,7 @@
 <?php
+// If you remove this. You might die.
+define('FRAPI_CACHE_ADAPTER', 'apc');
+
 
 // Use the constant CUSTOM_MODEL to access the custom model directory
 define ('COUCH_DB', CUSTOM_MODEL . DIRECTORY_SEPARATOR . 'CouchDB');
