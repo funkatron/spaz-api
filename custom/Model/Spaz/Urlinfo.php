@@ -79,7 +79,12 @@ class Spaz_Urlinfo
             curl_close($this->curl);
             
             $res['resolved_url'] = $url_info['url'];
-            $res['content_type'] = $url_info['content_type'];
+            if (isset($url_info['content_type'])) {
+                $res['content_type'] = $url_info['content_type'];
+            } else {
+                $res['content_type'] = 'unknown';
+            }
+            
             $res['http_code'] = $url_info['http_code'];
             $res['filetime'] = $url_info['filetime'];
             $res['download_content_length'] = $url_info['download_content_length'];

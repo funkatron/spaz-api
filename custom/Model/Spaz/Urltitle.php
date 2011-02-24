@@ -53,9 +53,7 @@ class Spaz_Urltitle
     }
 
     /**
-     * Get URL info
-     *
-     * This method fetches info about the URL, like the HTTP response code and content type.
+     * Get URL title
      *
      * @return array  Info about the URL
      */
@@ -73,41 +71,49 @@ class Spaz_Urltitle
             curl_setopt($this->curl, CURLOPT_USERAGENT, "Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_2; en-us) AppleWebKit/531.21.8 (KHTML, like Gecko) Version/4.0.4 Safari/531.21.10");
             
             $html = curl_exec($this->curl);
-            // print_r(htmlentities($body));
+            
+            $status = curl_getinfo($this->curl, CURLINFO_HTTP_CODE);
+            
             curl_close($this->curl);
             
-            $tidy_config = array(
-                'clean' => true,
-                'output-html'=>true,
-                'wrap' => 78,
-                'quiet'=>1
-            );
+            if ($status == 200 && $html) {
+                
+                $tidy_config = array(
+                    'clean' => true,
+                    'output-html'=>true,
+                    'wrap' => 78,
+                    'quiet'=>1
+                );
 
-            $tidy = new tidy;
-            $tidy->parseString($html, $tidy_config);
-            $tidy->cleanRepair();
+                $tidy = new tidy;
+                $tidy->parseString($html, $tidy_config);
+                $tidy->cleanRepair();
 
-            $html = $tidy->html()->value;
+                $html = $tidy->html()->value;
 
-            // Buffer DOM errors rather than emitting them as warnings
-            $oldSetting = libxml_use_internal_errors(true);
+                // Buffer DOM errors rather than emitting them as warnings
+                $oldSetting = libxml_use_internal_errors(true);
 
-            $dom = new DOMDocument();
-            $dom->loadHTML($html);
-            
-            $xpath = new DOMXPath($dom);
-            $titles = $xpath->evaluate('//*[name()="title"]');
-            $title = $titles->item(0)->nodeValue;
-            
-            // Clear any existing errors from previous operations
-            libxml_clear_errors();
+                $dom = new DOMDocument();
+                $dom->loadHTML($html);
 
-            // Revert error buffering to its previous setting
-            libxml_use_internal_errors($oldSetting);
-            
-            
+                $xpath = new DOMXPath($dom);
+                $titles = $xpath->evaluate('//*[name()="title"]');
+                $title = $titles->item(0)->nodeValue;
+
+                // Clear any existing errors from previous operations
+                libxml_clear_errors();
+
+                // Revert error buffering to its previous setting
+                libxml_use_internal_errors($oldSetting);
+
+
+                
+            } else {
+                $title = 'Could not retrieve title';
+            }
+
             $res = array('title'=>$title);
-            
             $res = json_encode($res);
             $this->server->add($this->url_key, $res, MEMCACHE_COMPRESSED, self::CACHE_LIMIT);
         }

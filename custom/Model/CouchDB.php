@@ -59,7 +59,7 @@ class CouchDB {
     function view($design, $view,  $method = 'get', $data = NULL, $extra = NULL) {
 
         $url = '/'.$this->db.'/_design/' . $design . '/_view/' . $view . (!is_null($extra) ? '?' .$extra : '');
-        $request = new CouchDB_Request($this->host, $this->port, $url, $method, $data, $username, $password);
+        $request = new CouchDB_Request($this->host, $this->port, $url, $method, $data, $this->username, $this->password);
         $this->responseObject = $request->send();
 
         return $this->responseObject;

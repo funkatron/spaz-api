@@ -40,7 +40,7 @@ class Action_Get_url_title extends Frapi_Action implements Frapi_Action_Interfac
     public function toArray()
     {
         $this->data['url'] = $this->getParam('url', self::TYPE_OUTPUT);
-	@file_put_contents("/var/www/api.getspaz.com/htdocs/frapi/custom/urltitle.log.json", json_encode($this->data)."\n", FILE_APPEND);
+	@file_put_contents("/var/www/api.getspaz.com/htdocs/spaz-api/custom/urltitle.log.json", json_encode($this->data)."\n", FILE_APPEND);
         return $this->data;
     }
 
@@ -92,8 +92,12 @@ class Action_Get_url_title extends Frapi_Action implements Frapi_Action_Interfac
         if (stripos($res['content_type'], 'text/html') !== FALSE
             || stripos($res['content_type'], 'application/xhtml+xml' !== FALSE)) {
             try {
-                $model = new Spaz_Urltitle($url);
-                $res = $model->get();
+                if ((int)$res['download_content_length'] < 128*1024) {
+                    $model = new Spaz_Urltitle($url);
+                    $res = $model->get();
+                } else {
+                    $res = array('title'=>'Could not retrieve title');
+                }
             } catch (Exception $e) {
                 throw new Frapi_Error($e->getMessage());
             }
